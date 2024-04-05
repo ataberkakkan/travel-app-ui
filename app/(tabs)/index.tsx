@@ -39,8 +39,6 @@ const Page = () => {
         }}
       />
       <View style={[styles.container, { paddingTop: headerHeight }]}>
-        <Text style={styles.headingTxt}>Explore The Beautiful World!</Text>
-
         <View style={styles.searchSectionWrapper}>
           <View style={styles.searchBar}>
             <Ionicons
