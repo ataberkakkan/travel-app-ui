@@ -10,18 +10,31 @@ import {
   View,
 } from "react-native";
 
-const CategoryButtons = () => {
+type CategoryButtonsProps = {
+  onCategoryChanged: (category: string) => void;
+};
+
+const CategoryButtons = ({ onCategoryChanged }: CategoryButtonsProps) => {
+  const scrollRef = useRef<ScrollView>(null);
   const itemRef = useRef<TouchableOpacity[] | null>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleSelectCategory = (index: number) => {
+    const selected = itemRef.current![index];
     setActiveIndex(index);
+
+    selected?.measure((x) => {
+      scrollRef.current?.scrollTo({ x: x, y: 0, animated: true });
+    });
+
+    onCategoryChanged(destinationCategories[index].title);
   };
 
   return (
     <View>
       <Text style={styles.title}>Categories</Text>
       <ScrollView
+        ref={scrollRef}
         showsHorizontalScrollIndicator={false}
         horizontal
         contentContainerStyle={{
@@ -33,7 +46,7 @@ const CategoryButtons = () => {
         {destinationCategories.map((item, index) => (
           <TouchableOpacity
             key={index}
-            ref={(el) => itemRef.current![index] === el}
+            ref={(el) => (itemRef.current[index] = el)}
             onPress={() => handleSelectCategory(index)}
             style={
               activeIndex === index
