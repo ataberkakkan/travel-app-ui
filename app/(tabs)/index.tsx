@@ -12,6 +12,8 @@ import {
 import { useHeaderHeight } from "@react-navigation/elements";
 import CategoryButtons from "@/components/CategoryButtons";
 import { useState } from "react";
+import Listings from "@/components/Listings";
+import listingData from "@/data/destinations.json";
 
 const Page = () => {
   const headerHeight = useHeaderHeight();
@@ -64,6 +66,8 @@ const Page = () => {
         </View>
 
         <CategoryButtons onCategoryChanged={onCategoryChanged} />
+
+        <Listings listings={listingData} />
       </View>
     </>
   );
