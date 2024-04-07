@@ -9,3 +9,11 @@ export interface Listing {
   location: string;
   category: string;
 }
+
+export interface GroupListing {
+  id: string;
+  name: string;
+  image: string;
+  rating: number;
+  reviews: number;
+}
